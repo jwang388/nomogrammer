@@ -161,11 +161,11 @@ if(sensspec == TRUE){
 
 ## Set common theme preferences up front
 theme_set(theme_bw() +
-              theme(axis.text.x = element_blank(),
+              theme(axis.text.x = element_blank(), 
                     axis.ticks.x = element_blank(),
                     axis.title.x = element_blank(),
-                    axis.title.y = element_text(angle = 0),
-                    axis.title.y.right = element_text(angle = 0),
+                    axis.title.y = element_text(angle = 0,family = "Times New Roman"),
+                    axis.title.y.right = element_text(angle = 0,family = "Times New Roman"),
                     axis.line = element_blank(),
                     panel.grid = element_blank(),
                     legend.position = "none"
@@ -248,9 +248,9 @@ p <- ggplot(df) +
                            limits = rescale,
                            breaks = -rescale_x_breaks,
                            labels = ticks_prob,
-                           name = "prior \n prob.",
+                           name = "Pretest \n Probability",
                            sec.axis = sec_axis(trans = ~.,
-                                               name = "posterior \n prob.",
+                                               name = "Posttest \n Probability",
                                                labels = ticks_prob,
                                                breaks = ticks_logodds))
 
