@@ -250,18 +250,11 @@ p <- ggplot(df) +
                            limits = rescale,
                            breaks = -rescale_x_breaks,
                            labels = ticks_prob,
-                           name = "Pretest \n Probability",
+                           name = NULL,
                            sec.axis = sec_axis(trans = ~.,
-                                               name = "Posttest \n Probability",
+                                               name = NULL,
                                                labels = ticks_prob,
                                                breaks = ticks_logodds))+
-    annotate(geom = "text",
-                 x = middle,  # Position at the middle vertical line
-                 y = min(rescale) - 0.5,  # Place below the x-axis
-                 label = "Likelihood \n Ratio",
-                 family = "Times New Roman",
-                 size = 5,
-                 hjust = 0.5)+
   theme(
           axis.title.y = element_text(family = "Times New Roman", size = 12),  # Pretest Probability
           axis.title.y.right = element_text(family = "Times New Roman", size = 12)  # Posttest Probability
