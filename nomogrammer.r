@@ -233,53 +233,38 @@ rescale_x_breaks  <- ticks_logodds + abs(adj_min) - adj_diff/2
 
 p <- ggplot(df) +
         geom_line(aes(x = x, y = lo_y, color = line), size = 1) +
-        geom_vline(xintercept = left) +   # First vertical line
-        geom_vline(xintercept = middle) + # Second vertical line
-        geom_vline(xintercept = right) +  # Third vertical line
+        geom_vline(xintercept = middle) +
         annotate(geom = "text",
                  x = rep(middle+.075, length(ticks_log_lrs)),
-                 y = (ticks_log_lrs - scale_factor) / 2,
+                 y = (ticks_log_lrs-scale_factor)/2,
                  label = ticks_lrs,
                  size = rel(LabelSize),
                  family = "Times New Roman") +
         annotate(geom="point",
                  x = rep(middle, length(ticks_log_lrs)),
-                 y = (ticks_log_lrs - scale_factor) / 2,
+                 y = (ticks_log_lrs-scale_factor)/2,
                  size = 1) +
-        scale_x_continuous(expand = c(0, 0)) + 
-        scale_y_continuous(expand = c(0, 0),
+        scale_x_continuous(expand = c(0,0)) + 
+        scale_y_continuous(expand = c(0,0),
                            limits = rescale,
                            breaks = -rescale_x_breaks,
-                           labels = ticks_prob) +
-        theme_minimal() +  
-        theme(
-          axis.text.x = element_blank(),  # Hide default x-axis labels
-          axis.ticks.x = element_blank(), # Hide x-axis ticks
-          axis.title.x = element_blank(), # Remove default x-axis title
-          plot.margin = margin(10, 10, 30, 10) # Adjust bottom margin for labels
-        ) +
-        # Custom text labels below vertical lines
-        annotate(geom = "text",
-                 x = left,  # First vertical line
-                 y = min(rescale) - 0.5, 
-                 label = "Pretest \n Probability",
-                 family = "Times New Roman",
-                 size = 5,
-                 hjust = 0.5) +
-        annotate(geom = "text",
-                 x = middle,  # Second vertical line
-                 y = min(rescale) - 0.5, 
+                           labels = ticks_prob,
+                           name = "Pretest \n Probability",
+                           sec.axis = sec_axis(trans = ~.,
+                                               name = "Posttest \n Probability",
+                                               labels = ticks_prob,
+                                               breaks = ticks_logodds))+
+    annotate(geom = "text",
+                 x = middle,  # Position at the middle vertical line
+                 y = min(rescale) - 0.5,  # Place below the x-axis
                  label = "Likelihood \n Ratio",
                  family = "Times New Roman",
                  size = 5,
-                 hjust = 0.5) +
-        annotate(geom = "text",
-                 x = right,  # Third vertical line
-                 y = min(rescale) - 0.5, 
-                 label = "Posttest \n Probability",
-                 family = "Times New Roman",
-                 size = 5,
-                 hjust = 0.5)
+                 hjust = 0.5)+
+  theme(
+          axis.title.y = element_text(family = "Times New Roman", size = 12),  # Pretest Probability
+          axis.title.y.right = element_text(family = "Times New Roman", size = 12)  # Posttest Probability
+        )
 
 ## Optional overlay text: prevalence, PLR/NLR, and posterior probabilities
 detailedAnnotation <- paste(
