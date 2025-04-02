@@ -244,19 +244,19 @@ p <- ggplot(df) +
                  x = rep(middle, length(ticks_log_lrs)),
                  y = (ticks_log_lrs-scale_factor)/2,
                  size = 1) +
-        scale_x_continuous(expand = c(0,0)) + 
-        scale_y_continuous(expand = c(0,0),
-                           limits = rescale,
-                           breaks = -rescale_x_breaks,
-                           labels = ticks_prob,
+        scale_x_continuous(expand = c(0,0),
                            name = "Pretest \n Probability",
                            sec.axis = sec_axis(trans = ~.,
                                                name = "Posttest \n Probability",
                                                labels = ticks_prob,
-                                               breaks = ticks_logodds))+
-  theme(
-          axis.title.y = element_text(family = "Times New Roman", size = 12),  # Pretest Probability
-          axis.title.y.right = element_text(family = "Times New Roman", size = 12)  # Posttest Probability
+                                               breaks = ticks_logodds)) + 
+        scale_y_continuous(expand = c(0,0),
+                           limits = rescale,
+                           breaks = -rescale_x_breaks,
+                           labels = ticks_prob) +
+        theme(
+          axis.title.x = element_text(family = "Times New Roman", size = 12),  # Pretest Probability (Bottom)
+          axis.title.x.top = element_text(family = "Times New Roman", size = 12)  # Posttest Probability (Bottom)
         )
 
 ## Optional overlay text: prevalence, PLR/NLR, and posterior probabilities
