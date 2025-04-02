@@ -238,7 +238,8 @@ p <- ggplot(df) +
                  x = rep(middle+.075, length(ticks_log_lrs)),
                  y = (ticks_log_lrs-scale_factor)/2,
                  label = ticks_lrs,
-                 size = rel(LabelSize)) +
+                 size = rel(LabelSize),
+                 family = "Times New Roman") +
         annotate(geom="point",
                  x = rep(middle, length(ticks_log_lrs)),
                  y = (ticks_log_lrs-scale_factor)/2,
@@ -252,7 +253,11 @@ p <- ggplot(df) +
                            sec.axis = sec_axis(trans = ~.,
                                                name = "Posttest \n Probability",
                                                labels = ticks_prob,
-                                               breaks = ticks_logodds))
+                                               breaks = ticks_logodds))+
+  theme(
+          axis.title.y = element_text(family = "Times New Roman", size = 12),  # Pretest Probability
+          axis.title.y.right = element_text(family = "Times New Roman", size = 12)  # Posttest Probability
+        )
 
 ## Optional overlay text: prevalence, PLR/NLR, and posterior probabilities
 detailedAnnotation <- paste(
