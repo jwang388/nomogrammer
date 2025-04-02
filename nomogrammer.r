@@ -232,7 +232,7 @@ rescale_x_breaks  <- ticks_logodds + abs(adj_min) - adj_diff/2
 
 
 p <- ggplot(df) +
-        geom_line(aes(x = x, y = lo_y, color = line), size = 1) +
+        geom_line(aes(x = x, y = lo_y, color = line, linetype = line), size = 1) +
         geom_vline(xintercept = middle) +
         annotate(geom = "text",
                  x = rep(middle+.075, length(ticks_log_lrs)),
@@ -244,6 +244,7 @@ p <- ggplot(df) +
                  x = rep(middle, length(ticks_log_lrs)),
                  y = (ticks_log_lrs-scale_factor)/2,
                  size = 1) +
+        scale_linetype_manual(values = c("pos" = "solid", "neg" = "dashed"))+
         scale_x_continuous(expand = c(0,0)) + 
         scale_y_continuous(expand = c(0,0),
                            limits = rescale,
