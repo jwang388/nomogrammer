@@ -254,7 +254,6 @@ p <- ggplot(df) +
                                                name = NULL,
                                                labels = ticks_prob,
                                                breaks = ticks_logodds))+
-  scale_linetype_manual(values = c("solid", "dashed")) +
   theme(
           axis.title.y = element_text(family = "Times New Roman", size = 12),  # Pretest Probability
           axis.title.y.right = element_text(family = "Times New Roman", size = 12)  # Posttest Probability
